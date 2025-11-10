@@ -83,21 +83,6 @@ class HuiEntitiesCard extends LitElement implements LovelaceCard {
 
   private _footerElement?: LovelaceHeaderFooter;
 
-  connectedCallback(): void {
-    super.connectedCallback();
-    this.addEventListener("row-visibility-changed", (ev) =>
-      this._updateRowVisibility(ev)
-    );
-  }
-
-  disconnectedCallback(): void {
-    super.disconnectedCallback();
-    this.removeEventListener(
-      "row-visibility-changed",
-      this._updateRowVisibility
-    );
-  }
-
   set hass(hass: HomeAssistant) {
     this._hass = hass;
     this.shadowRoot
@@ -266,9 +251,18 @@ class HuiEntitiesCard extends LitElement implements LovelaceCard {
 
     #states {
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: var(--entities-card-row-gap, var(--card-row-gap, 8px));
+    }
+
+    #states > * {
+      margin: 8px 0;
+    }
+
+    #states > *:first-child {
+      margin-top: 0;
+    }
+
+    #states > *:last-child {
+      margin-bottom: 0;
     }
 
     #states > div > * {
@@ -326,16 +320,8 @@ class HuiEntitiesCard extends LitElement implements LovelaceCard {
       element.hass = this._hass;
     }
 
-    return html`<div ?hidden=${element.hidden}>${element}</div>`;
+    return html`<div>${element}</div>`;
   }
-
-  private _updateRowVisibility = (ev) => {
-    if (ev.detail?.value === false) {
-      ev.detail?.row?.parentElement!.style.setProperty("display", "none");
-    } else {
-      ev.detail?.row?.parentElement!.style.setProperty("display", "");
-    }
-  };
 }
 
 declare global {
