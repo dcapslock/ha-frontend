@@ -51,7 +51,6 @@ class HuiSectionRow extends LitElement implements LovelaceRow {
       margin-right: -16px;
       margin-inline-start: -16px;
       margin-inline-end: -16px;
-      margin-top: 8px;
     }
   `;
 }
