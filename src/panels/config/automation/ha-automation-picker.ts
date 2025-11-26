@@ -299,7 +299,6 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
         },
         area: {
           title: localize("ui.panel.config.automation.picker.headers.area"),
-          defaultHidden: true,
           groupable: true,
           filterable: true,
           sortable: true,
@@ -452,7 +451,10 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
             .indeterminate=${partial}
             reducedTouchTarget
           ></ha-checkbox>
-          <ha-label style=${color ? `--color: ${color}` : ""}>
+          <ha-label
+            style=${color ? `--color: ${color}` : ""}
+            .description=${label.description}
+          >
             ${label.icon
               ? html`<ha-icon slot="icon" .icon=${label.icon}></ha-icon>`
               : nothing}
@@ -1158,6 +1160,9 @@ class HaAutomationPicker extends SubscribeMixin(LitElement) {
   private async _delete(automation) {
     try {
       await deleteAutomation(this.hass, automation.attributes.id);
+      this._selected = this._selected.filter(
+        (entityId) => entityId !== automation.entity_id
+      );
     } catch (err: any) {
       await showAlertDialog(this, {
         text:

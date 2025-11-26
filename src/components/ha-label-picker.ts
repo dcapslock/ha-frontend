@@ -154,7 +154,10 @@ export class HaLabelPicker extends SubscribeMixin(LitElement) {
     }
 
     return this._getLabelsMemoized(
-      this.hass,
+      this.hass.states,
+      this.hass.areas,
+      this.hass.devices,
+      this.hass.entities,
       this._labels,
       this.includeDomains,
       this.excludeDomains,
@@ -224,8 +227,9 @@ export class HaLabelPicker extends SubscribeMixin(LitElement) {
         .hass=${this.hass}
         .autofocus=${this.autofocus}
         .label=${this.label}
-        .notFoundLabel=${this.hass.localize(
-          "ui.components.label-picker.no_match"
+        .notFoundLabel=${this._notFoundLabel}
+        .emptyLabel=${this.hass.localize(
+          "ui.components.label-picker.no_labels"
         )}
         .addButtonLabel=${this.hass.localize("ui.components.label-picker.add")}
         .placeholder=${placeholder}
@@ -288,6 +292,11 @@ export class HaLabelPicker extends SubscribeMixin(LitElement) {
       fireEvent(this, "change");
     }, 0);
   }
+
+  private _notFoundLabel = (search: string) =>
+    this.hass.localize("ui.components.label-picker.no_match", {
+      term: html`<b>‘${search}’</b>`,
+    });
 }
 
 declare global {
