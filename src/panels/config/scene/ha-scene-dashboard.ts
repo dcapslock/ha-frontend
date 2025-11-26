@@ -271,7 +271,6 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
         },
         area: {
           title: localize("ui.panel.config.scene.picker.headers.area"),
-          defaultHidden: true,
           groupable: true,
           filterable: true,
           sortable: true,
@@ -473,7 +472,10 @@ class HaSceneDashboard extends SubscribeMixin(LitElement) {
             .indeterminate=${partial}
             reducedTouchTarget
           ></ha-checkbox>
-          <ha-label style=${color ? `--color: ${color}` : ""}>
+          <ha-label
+            style=${color ? `--color: ${color}` : ""}
+            .description=${label.description}
+          >
             ${label.icon
               ? html`<ha-icon slot="icon" .icon=${label.icon}></ha-icon>`
               : nothing}
@@ -1109,6 +1111,9 @@ ${rejected
   private async _delete(scene: SceneEntity): Promise<void> {
     if (scene.attributes.id) {
       await deleteScene(this.hass, scene.attributes.id);
+      this._selected = this._selected.filter(
+        (entityId) => entityId !== scene.entity_id
+      );
     }
   }
 
