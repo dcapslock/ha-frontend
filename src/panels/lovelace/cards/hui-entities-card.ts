@@ -243,7 +243,7 @@ class HuiEntitiesCard extends LitElement implements LovelaceCard {
                     `}
               </h1>
             `}
-        <div id="states" class="card-content">
+        <div id="states">
           ${this._configEntities!.map((entityConf) =>
             this._renderEntity(entityConf)
           )}
@@ -279,6 +279,14 @@ class HuiEntitiesCard extends LitElement implements LovelaceCard {
       display: flex;
       flex-direction: column;
       gap: var(--entities-card-row-gap, var(--card-row-gap, 8px));
+      padding: var(--ha-space-4);
+    }
+
+    .card-header + #states,
+    .header-footer + #states,
+    .header-footer + .card-header + #states {
+      padding-top: 0;
+      margin-top: calc(var(--ha-space-2) * -1);
     }
 
     #states > div > * {
