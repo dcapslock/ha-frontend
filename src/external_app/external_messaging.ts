@@ -347,6 +347,7 @@ export interface ExternalConfig {
   hasBarCodeScanner?: number;
   canSetupImprov?: boolean;
   appVersion?: string;
+  deviceName?: string;
   hasEntityAddTo?: boolean; // Supports "Add to" from more-info dialog, with action coming from external app
   hasAssistSettings?: boolean; // Shows the "This device" section in voice assistant settings
 }
