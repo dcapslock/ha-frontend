@@ -50,10 +50,6 @@ export class HuiBarRowEditor extends LitElement implements LovelaceRowEditor {
           selector: { ui_color: {} },
         },
         {
-          name: "state_color",
-          selector: { boolean: {} },
-        },
-        {
           name: "show_value",
           selector: { boolean: {} },
         },
@@ -92,7 +88,6 @@ export class HuiBarRowEditor extends LitElement implements LovelaceRowEditor {
       case "color":
       case "min":
       case "max":
-      case "state_color":
       case "show_value":
       case "loading":
         return this.hass!.localize(

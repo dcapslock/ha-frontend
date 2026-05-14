@@ -9266,7 +9266,6 @@
               "min": "Minimum",
               "max": "Maximum",
               "color": "Color",
-              "state_color": "Use state color",
               "show_value": "Show value",
               "loading": "Show loading animation"
             },
