@@ -75,7 +75,7 @@ class HuiBarRow extends LitElement implements LovelaceRow {
         : 100);
 
     const percentage =
-      unavailable || isNaN(numericValue)
+      unavailable || isNaN(numericValue) || max === min
         ? 0
         : Math.min(
             100,
@@ -132,7 +132,7 @@ class HuiBarRow extends LitElement implements LovelaceRow {
       width: 100%;
     }
     .value {
-      font-size: 0.85em;
+      font-size: var(--ha-font-size-s);
       color: var(--secondary-text-color);
       text-align: var(--float-end);
     }
