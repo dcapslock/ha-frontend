@@ -90,6 +90,7 @@ export type LovelaceRowConfig =
   | ButtonsRowConfig
   | ConditionalRowConfig
   | AttributeRowConfig
+  | BarRowConfig
   | TextConfig;
 
 export interface LovelaceRow extends HTMLElement {
@@ -108,4 +109,14 @@ export interface AttributeRowConfig extends EntityConfig {
   prefix?: string;
   suffix?: string;
   format?: TimestampRenderingFormat;
+}
+
+export interface BarRowConfig extends EntityConfig {
+  attribute?: string;
+  min?: number;
+  max?: number;
+  color?: string;
+  state_color?: boolean;
+  show_value?: boolean;
+  loading?: boolean;
 }
